@@ -80,6 +80,8 @@ def check_and_remove_cards(idx1, idx2, player=True):
             player_score += 2
         else:
             cpu_score += 2
+        return True
+    return False
 
 def print_score():
     print("Player Score :", player_score, "CPU Score:", cpu_score)
@@ -87,18 +89,23 @@ def print_score():
 num = int(input("Num Cards?: "))
 init_cards(num // 2)
 
+player_removed = False
+cpu_removed = False
+
 while len(cards) != 0:
     turn += 1
     print("Turn:", turn)
     show_lie_cards()
 
-    idx1, idx2 = inputs_filtered()
-    show_reverse_cards(idx1, idx2)
-    check_and_remove_cards(idx1, idx2, player=True)
+    if not cpu_removed:
+        idx1, idx2 = inputs_filtered()
+        show_reverse_cards(idx1, idx2)
+        player_removed = check_and_remove_cards(idx1, idx2, player=True)
 
-    cpu1, cpu2 = cpu_random_choice()
-    show_reverse_cards(cpu1, cpu2)
-    check_and_remove_cards(cpu1, cpu2, player=False)
+    if not player_removed:
+        cpu1, cpu2 = cpu_random_choice()
+        show_reverse_cards(cpu1, cpu2)
+        cpu_removed = check_and_remove_cards(cpu1, cpu2, player=False)
 
     print_score()
     print()
