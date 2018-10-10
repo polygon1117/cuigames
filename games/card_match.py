@@ -84,7 +84,7 @@ def check_and_remove_cards(idx1, idx2, player=True):
 def print_score():
     print("Player Score :", player_score, "CPU Score:", cpu_score)
 
-num = input("Num Cards?: ")
+num = int(input("Num Cards?: "))
 init_cards(num // 2)
 
 while len(cards) != 0:
