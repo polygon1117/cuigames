@@ -4,7 +4,7 @@ Overview
 自作したCUIのゲーム置き場
 
 ## Requirement
-python3~
+python3.x
 
 ## Usage
 1. cd games
