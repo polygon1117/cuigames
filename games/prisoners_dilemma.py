@@ -1,7 +1,7 @@
 import random
 from time import sleep
 import sys
-sys.path.append("../myscript")
+sys.path.append("../myutil")
 from text_effect import type_print
 
 class Prisoner():
