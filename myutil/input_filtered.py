@@ -55,3 +55,20 @@ def int_input(min_val=None, max_val=None, description="",
             elif value_error_message:
                 print(value_error_message)
             continue
+
+
+def alphabets_input(min_length=None, max_length=None, description="", filter_null=True):
+    while True:
+        inputs = input(description)
+        if not filter_null and len(inputs) == 0:
+            return ""
+        if inputs.isalpha():
+            if min_length is not None and len(inputs) < min_length:
+                continue
+
+            elif max_length is not None and len(inputs) > max_length:
+                continue
+
+            return inputs
+        else:
+            pass
