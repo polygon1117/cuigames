@@ -221,6 +221,7 @@ class GameMaster(object):
 
 
 def play(master):
+    master.show_players_status()
     master.show_field()
     print()
 
