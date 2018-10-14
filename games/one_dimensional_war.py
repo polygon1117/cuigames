@@ -117,7 +117,8 @@ class GameMaster(object):
                     idx1_next = idx1 - idx2 - 1
                     self.p1_field[i] = alphabets[idx1_next]
                     self.p2_field[i] = " "
-                    self.field[i] = min(self.field[i] + (idx1_next + 1), self.threthold)
+                    self.field[i] = min(
+                        self.field[i] + (idx1_next + 1), self.threthold)
                 elif idx1 == idx2:
                     self.p1_field[i] = " "
                     self.p2_field[i] = " "
@@ -125,7 +126,8 @@ class GameMaster(object):
                     idx2_next = idx2 - idx1 - 1
                     self.p1_field[i] = " "
                     self.p2_field[i] = alphabets[idx2_next]
-                    self.field[i] = max(self.field[i] - (idx2_next + 1), -self.threthold)
+                    self.field[i] = max(
+                        self.field[i] - (idx2_next + 1), -self.threthold)
 
     def _update_field(self):
         # Update p1_field
@@ -221,14 +223,15 @@ class GameMaster(object):
 
 
 def play(master):
+    master.show_players_status()
     master.show_field()
     print()
 
     while not master.game_end():
-        master.show_players_status()
         master.update()
-        master.show_field()
         print()
+        master.show_players_status()
+        master.show_field()
 
 
 if __name__ == '__main__':

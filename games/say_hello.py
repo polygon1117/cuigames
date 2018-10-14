@@ -5,6 +5,7 @@ alphabets = list("abcdefghijklmnopqrstuvwxyz")
 to_alphabets = list("abcdefghijklmnopqrstuvwxyz")
 random.shuffle(to_alphabets)
 
+
 def inputs_filtered(count):
     inputs = input("[{}] type 5 words: ".format(count))
     tmp = []
@@ -27,6 +28,7 @@ def cpu_replay(inputs):
     print("<", replay)
 
     return replay
+
 
 if __name__ == "__main__":
     count = 0

@@ -2,8 +2,10 @@ import sys
 sys.path.append("../myutil")
 from input_filtered import int_input
 
+
 def bit_flag(bit, index):
     return bit >> index & 1
+
 
 def next_generation(state, rule):
     if len(state) == 1:
@@ -14,11 +16,12 @@ def next_generation(state, rule):
         if i == 0:
             index = state[0] * 2 + state[1]
         elif i == len(state) - 1:
-            index = state[i-1] * 4 + state[i] * 2
+            index = state[i - 1] * 4 + state[i] * 2
         else:
-            index = state[i-1] * 4 + state[i] * 2 + state[i+1]
+            index = state[i - 1] * 4 + state[i] * 2 + state[i + 1]
         next_gen.append(bit_flag(rule, index))
     return next_gen
+
 
 def show_state(state):
     for s in state:
@@ -27,6 +30,7 @@ def show_state(state):
         elif s == 1:
             print('*', end="")
     print()
+
 
 if __name__ == '__main__':
     rule = int_input(min_val=0, max_val=255, description="Rule:")

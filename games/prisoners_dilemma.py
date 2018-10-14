@@ -4,6 +4,7 @@ import sys
 sys.path.append("../myutil")
 from text_effect import type_print
 
+
 class Prisoner():
     def __init__(self, name):
         self.jail_years = 0
@@ -13,7 +14,7 @@ class Prisoner():
         pass
 
     def decision(self):
-        """return confession(True) or silence(False)."""
+        """Return confession(True) or silence(False)."""
         return True
 
     def say_decision(self, mydecision):
@@ -139,6 +140,7 @@ class Friedman(Prisoner):
 def one_game(prisoner1, prisoner2, jail_years):
     """
     Do one game.
+
     Args:
         prisoner1(Prisoner): Prisoner1
         prisoner2(Prisoner): Prisoner2
@@ -166,8 +168,10 @@ def one_game(prisoner1, prisoner2, jail_years):
 
 
 def show_result(prisoners, interval):
-    prisoners_with_jail = {prisoner: prisoner.jail_years for prisoner in prisoners}
-    prisoners_with_jail = sorted(prisoners_with_jail.items(), key=lambda x: x[1])
+    prisoners_with_jail = {
+        prisoner: prisoner.jail_years for prisoner in prisoners}
+    prisoners_with_jail = sorted(
+        prisoners_with_jail.items(), key=lambda x: x[1])
     print("Winner: ", end="")
     for i, prisoner in enumerate(dict(prisoners_with_jail).keys()):
         sleep(interval)
@@ -208,8 +212,8 @@ if __name__ == '__main__':
     prisoners = init_prisoners()
 
     heavy = random.randint(5, 20)
-    regular = random.randint(3, heavy-1)
-    light = random.randint(1, regular-1)
+    regular = random.randint(3, heavy - 1)
+    light = random.randint(1, regular - 1)
     # [(s, s), (s, c), (c, s), (c, c)]
     jail_years = [(light, light), (heavy, 0), (0, heavy), (regular, regular)]
 

@@ -8,6 +8,7 @@ turn = 0
 
 alphabets = "abcdefghijklmnopqrstuvwxyz"
 
+
 def init_cards(num):
     global player_score
     global cpu_score
@@ -24,6 +25,7 @@ def init_cards(num):
         for i in range(2):
             cards.append(c)
 
+
 def show_lie_cards():
     for i in range(len(cards)):
         print("{:3}".format(i), end="")
@@ -32,6 +34,7 @@ def show_lie_cards():
         print("  *", end="")
     print()
 
+
 def show_reverse_cards(idx1, idx2):
     for i in range(len(cards)):
         if i in [idx1, idx2]:
@@ -39,6 +42,7 @@ def show_reverse_cards(idx1, idx2):
         else:
             print("  *", end="")
     print()
+
 
 def inputs_filtered():
     while True:
@@ -55,6 +59,7 @@ def inputs_filtered():
             continue
         return filtered
 
+
 def cpu_random_choice():
     print("CPU choicing...")
     sleep(random.gauss(1, 1))
@@ -65,6 +70,7 @@ def cpu_random_choice():
         if c not in inputs:
             inputs.append(c)
     return inputs
+
 
 def check_and_remove_cards(idx1, idx2, player=True):
     global player_score
@@ -83,8 +89,10 @@ def check_and_remove_cards(idx1, idx2, player=True):
         return True
     return False
 
+
 def print_score():
     print("Player Score :", player_score, "CPU Score:", cpu_score)
+
 
 num = int(input("Num Cards?: "))
 init_cards(num // 2)
