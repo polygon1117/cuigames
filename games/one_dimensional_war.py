@@ -1,7 +1,7 @@
 import random
 import sys
 sys.path.append('../myutil')
-from input_filtered import int_input, alphabets_input
+from input_filtered import alphabets_input
 
 alphabets = "abcdefghijklmnopqrstuvwxyz"
 
