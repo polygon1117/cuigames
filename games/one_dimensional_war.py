@@ -225,10 +225,10 @@ def play(master):
     print()
 
     while not master.game_end():
-        master.show_players_status()
         master.update()
-        master.show_field()
         print()
+        master.show_players_status()
+        master.show_field()
 
 
 if __name__ == '__main__':
