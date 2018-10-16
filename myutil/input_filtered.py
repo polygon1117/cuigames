@@ -57,6 +57,20 @@ def int_input(min_val=None, max_val=None, description="",
             continue
 
 
+def true_or_false_input(true_val, false_val, description="", lower=True):
+    while True:
+        inputs = input(description)
+        if lower:
+            inputs = inputs.lower()
+            
+        if inputs == true_val:
+            return True
+        if inputs == false_val:
+            return False
+        else:
+            print('Input {} or {}'.format(true_val, false_val))
+
+
 def alphabets_input(min_length=None, max_length=None, description="", filter_null=True):
     while True:
         inputs = input(description)
