@@ -27,7 +27,7 @@ def pick_two_cards(cards):
     return cards[:2]
 
 
-cards = ['{}{}'.format(soot, num+1)
+cards = ['{}{}'.format(soot, num + 1)
          for num in range(13)
          for soot in ['H', 'S', 'C', 'D']]
 
@@ -52,7 +52,7 @@ while True:
 
     # high or low?
     high = true_or_false_input('high', 'low',
-                description='High or Low? ')
+                               description='High or Low? ')
 
     # open cards
     print('Open Cards')
