@@ -1,9 +1,64 @@
+def _print_error_message(error_message, default_message):
+    if error_message == "default":
+        print(default_message)
+    elif error_message:
+        print(error_message)
 
 
-def int_input(min_val=None, max_val=None, description="",
+def _filter_inputs_by_min(inputs_int, min_val, error_message="default"):
+    default_message = "Input value should be bigger\
+     than or equal {}.".format(min_val)
+
+    if inputs_int is None:
+        return None
+
+    if min_val is not None and inputs_int < min_val:
+        _print_error_message(error_message=error_message,
+                             default_message=default_message)
+        return None
+    return inputs_int
+
+
+def _filter_inputs_by_max(inputs_int, max_val, error_message="default"):
+    default_message = "Input value should be smaller\
+     than or equal {}.".format(max_val)
+
+    if inputs_int is None:
+        return None
+
+    if max_val is not None and inputs_int > max_val:
+        _print_error_message(error_message=error_message,
+                             default_message=default_message)
+        return None
+    return inputs_int
+
+
+def _split_and_filter_inputs_by_nargs(inputs, nargs, splitter=None,
+                                      error_message="default"):
+    default_message = "Input value require {} integers\
+     splited by {}.".format(nargs, splitter)
+    if nargs == 1:
+        return [inputs]
+
+    if splitter is None:
+        splited = inputs.split()
+    else:
+        splited = inputs.split(splitter)
+
+    if len(splited) == nargs:
+        return splited
+    else:
+        _print_error_message(error_message=error_message,
+                             default_message=default_message)
+        return None
+
+
+def int_input(min_val=None, max_val=None, nargs=1, splitter=None,
+              description="",
               min_error_message="default",
               max_error_message="default",
-              value_error_message="default"):
+              value_error_message="default",
+              nargs_error_message="default"):
     """
     Read a string from standard input. And transform a string integer.
 
@@ -17,6 +72,10 @@ def int_input(min_val=None, max_val=None, description="",
         Minimum value (inclued).
     max_val : int
         Maximum value (inclued).
+    nargs : int
+        Number of integers.
+    splitter : string
+        Split input value by this if nargs is not 1.
     description : string
         Use like input(description).
     min_error_message : string
@@ -28,47 +87,42 @@ def int_input(min_val=None, max_val=None, description="",
     value_error_message : string
         Print this if input value cannot be transformed to integer.
         If don't want to print message, set None.
+    nargs_error_message : string
+        Print this if length of input value splited by splitter is not nargs.
+        If don't want to print message, setNone.
 
     Returns
     -------
-    input_int : int
-        Input value.
+    input_int : int or list
+        If nargs is 1 return int, else return list.
 
     """
-    def filter_inputs_by_min(inputs_int):
-        if min_val is not None and inputs_int < min_val:
-            if min_error_message == "default":
-                print("Input value should be bigger\
-                 than or equal {}.".format(min_val))
-            elif min_error_message:
-                print(min_error_message)
-            return None
-        return inputs_int
-
-    def filter_inputs_by_max(inputs_int):
-        if max_val is not None and inputs_int > max_val:
-            if max_error_message == "default":
-                print("Input value should be smaller\
-                 than or equal {}.".format(max_val))
-            elif max_error_message:
-                print(max_error_message)
-            return None
-        return inputs_int
-
-    def filter_inputs_by_min_max(inputs):
+    def _filter_inputs_by_min_max(inputs, min_val, max_val):
         inputs_int = int(inputs)
-        inputs_filtered_min = filter_inputs_by_min(inputs_int)
-        inputs_filtered = filter_inputs_by_max(inputs_filtered_min)
+        inputs_filtered_min = _filter_inputs_by_min(inputs_int, min_val,
+                                                    min_error_message)
+        inputs_filtered = _filter_inputs_by_max(inputs_filtered_min, max_val,
+                                                max_error_message)
         return inputs_filtered
 
     while True:
         inputs = input(description)
+        splited_inputs = _split_and_filter_inputs_by_nargs(inputs, nargs,
+                                                           splitter,
+                                                           nargs_error_message)
+
+        ret_integers = []
         try:
-            inputs_int = filter_inputs_by_min_max(inputs)
-            if inputs_int is None:
-                continue
-            else:
-                return inputs_int
+            for integer in splited_inputs:
+                inputs_int = _filter_inputs_by_min_max(integer,
+                                                       min_val,
+                                                       max_val)
+                if inputs_int is None:
+                    break
+                ret_integers.append(inputs_int)
+            else:  # Successful in for loop
+                return ret_integers[0] if nargs == 1 else ret_integers
+            continue  # Fail in for loop
         except ValueError:
             if value_error_message == "default":
                 print("Input value should be integer")
