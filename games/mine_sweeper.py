@@ -181,7 +181,7 @@ class Board(object):
             If it's clear return True, otherwise False.
 
         """
-        if np.sum(np.abs(self._mask_board - self._mine_board)) == 0:
+        if np.sum(np.abs(self._mask_board + self._mine_board)) == 0:
             return True
         return False
 
